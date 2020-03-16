@@ -1,14 +1,18 @@
-import React, { useContext } from 'react'
-import { StudentContext } from '../context/StudentState'
-import { StudentList } from './StudentList'
+// import React, { useContext, useState } from 'react'
+// import { StudentContext } from '../context/StudentState'
 
-export const Student = ({ student }) => {
-  const { deleteStudent } = useContext(StudentContext)
+// export const Student = ({ student }) => {
+//   const { deleteStudent } = useContext(StudentContext)
+//   const { students } = useContext(StudentContext)
 
-  return (
-    <li>
-      {student.name}
-      <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
-    </li>
-  )
-}
+//   return (
+//     <li>
+//       <ul>
+//         {student.name}
+//         {student.email}
+//         {student.major}
+//       </ul>
+//       <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
+//     </li>
+//   )
+// }
