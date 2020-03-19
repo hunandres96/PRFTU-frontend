@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Card, Table, Button, ButtonGroup } from 'react-bootstrap'
+import { Card, Table, Button, ButtonGroup, InputGroup, FormControl } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faList, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faList, faEdit, faTrash, faFastBackward, faStepBackward, faStepForward, faFastForward } from '@fortawesome/free-solid-svg-icons'
 import StudentToast from './StudentToast'
 
 export default class StudentList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      students: []
+      students: [],
+      currentPage: 1,
+      studentsPerPage: 5
     }
   }
 
@@ -46,7 +48,59 @@ export default class StudentList extends Component {
       })
   }
 
+  changePage = (e) => {
+    this.setState({
+      [e.target.name]: parseInt(e.target.value)
+    })
+  }
+
+  firtPage = () => {
+    if (this.state.currentPage > 1) {
+      this.setState({
+        currentPage: 1
+      })
+    }
+  }
+
+  prevPage = () => {
+    if (this.state.currentPage > 1) {
+      this.setState({
+        currentPage: this.state.currentPage - 1
+      })
+    }
+  }
+
+  nextPage = () => {
+    if (this.state.currentPage < Math.ceil(this.state.students.length / this.state.studentsPerPage)) {
+      this.setState({
+        currentPage: this.state.currentPage + 1
+      })
+    }
+  }
+
+  lastPage = () => {
+    if (this.state.currentPage < Math.ceil(this.state.students.length / this.state.studentsPerPage)) {
+      this.setState({
+        currentPage: Math.ceil(this.state.students.length / this.state.studentsPerPage)
+      })
+    }
+  }
+
   render() {
+    const { students, currentPage, studentsPerPage } = this.state;
+    const lastIndex = currentPage * studentsPerPage;
+    const firstIndex = lastIndex - studentsPerPage;
+    const currentStudents = students.slice(firstIndex, lastIndex);
+    const totalPages = students.length / studentsPerPage;
+
+    const pageNumCss = {
+      width: "45px",
+      border: "1px solid #17A2B8",
+      color: "#17A2B8",
+      textAlign: "center",
+      fontWeigth: "bold"
+    }
+
     return (
       <div>
         <div style={{ "display": this.state.show ? "block" : "none" }}>
@@ -68,7 +122,7 @@ export default class StudentList extends Component {
               </thead>
 
               <tbody>
-                {this.state.students.map(student => (
+                {currentStudents.map(student => (
                   <tr key={student.id}>
                     <td>{student.student_name}</td>
                     <td>{student.student_email}</td>
@@ -93,6 +147,59 @@ export default class StudentList extends Component {
               </tbody>
             </Table>
           </Card.Body>
+
+          <Card.Footer>
+            <div style={{ "float": "left" }}>
+              Showing Page {currentPage} of {totalPages}
+            </div>
+            <div style={{ "float": "right" }}>
+              <InputGroup size="sm">
+
+                <InputGroup.Prepend>
+                  <Button
+                    type="button"
+                    variant="outline-info"
+                    disabled={currentPage === 1 ? true : false}
+                    onClick={this.firtPage}>
+                    <FontAwesomeIcon icon={faFastBackward} />First
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline-info"
+                    disabled={currentPage === 1 ? true : false}
+                    onClick={this.prevPage}>
+                    <FontAwesomeIcon icon={faStepBackward} />Prev
+                  </Button>
+                </InputGroup.Prepend>
+
+                <FormControl
+                  style={pageNumCss}
+                  className={"bg-dark"}
+                  name="currentPage"
+                  value={currentPage}
+                  onChange={this.changePage} />
+
+                <InputGroup.Append>
+                  <Button
+                    type="button"
+                    variant="outline-info"
+                    disabled={currentPage === totalPages ? true : false}
+                    onClick={this.nextPage}>
+                    <FontAwesomeIcon icon={faStepForward} />Next
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline-info"
+                    disabled={currentPage === totalPages ? true : false}
+                    onClick={this.lastPage}>
+                    <FontAwesomeIcon icon={faFastForward} />Last
+                  </Button>
+                </InputGroup.Append>
+
+              </InputGroup>
+            </div>
+          </Card.Footer>
+
         </Card>
       </div>
 
