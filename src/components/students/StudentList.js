@@ -1,46 +1,101 @@
 import React, { Component } from 'react'
-import { Card, Table } from 'react-bootstrap'
+import axios from 'axios'
+import { Card, Table, Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faList } from '@fortawesome/free-solid-svg-icons'
+import { faList, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import StudentToast from './StudentToast'
 
 export default class StudentList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      students: []
+    }
+  }
+
+  componentDidMount() {
+    this.getAllStudents()
+  }
+
+  getAllStudents() {
+    const students_url = 'http://localhost:8080/students';
+
+    axios.get(students_url)
+      .then(response => response.data)
+      .then(res => {
+        this.setState({ students: res })
+        console.log(res)
+      })
+  }
+
+  deleteStudent = (studentId) => {
+    const students_url = 'http://localhost:8080/students/';
+
+    axios.delete(students_url + studentId)
+      .then(res => {
+        if (res.data != null) {
+          this.setState({ "show": true })
+          setTimeout(() => this.setState({ "show": false }), 3000)
+
+          this.setState({
+            students: this.state.students.filter(student => student.id !== studentId)
+          })
+        } else {
+          this.setState({ "show": false })
+        }
+      })
+  }
+
   render() {
     return (
-      <Card className="border border-dark bg-dark text-white">
-        <Card.Header><FontAwesomeIcon icon={faList} /> Students:</Card.Header>
-        <Card.Body>
-          <Table bordered hover striped variant="dark">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Major</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Andres Hun</td>
-                <td>andreshun@gmail.com</td>
-                <td>Marketing</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Miguel Hun</td>
-                <td>miguelhun@gmail.com</td>
-                <td>Info System</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Jorge Villegas</td>
-                <td>jorgevillegas@gmail.com</td>
-                <td>Graphic Design</td>
-              </tr>
-            </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+      <div>
+        <div style={{ "display": this.state.show ? "block" : "none" }}>
+          <StudentToast
+            children={{ show: this.state.show, message: "Student Deleted Successfully" }}>
+          </StudentToast>
+        </div>
+        <Card className="border border-dark bg-dark text-white">
+          <Card.Header><FontAwesomeIcon icon={faList} /> Students:</Card.Header>
+          <Card.Body>
+            <Table bordered hover striped variant="dark">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Major</th>
+                  <th>Edit/Delete</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {this.state.students.map(student => (
+                  <tr key={student.id}>
+                    <td>{student.student_name}</td>
+                    <td>{student.student_email}</td>
+                    <td>{student.major.major_name}</td>
+                    <td>
+                      <ButtonGroup>
+                        <Button
+                          size="sm"
+                          variant="outline-primary">
+                          <FontAwesomeIcon icon={faEdit} />
+                        </Button>
+                        <Button
+                          onClick={this.deleteStudent.bind(this, student.id)}
+                          size="sm"
+                          variant="outline-danger">
+                          <FontAwesomeIcon icon={faTrash} />
+                        </Button>
+                      </ButtonGroup>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Card.Body>
+        </Card>
+      </div>
+
     )
   }
 }
