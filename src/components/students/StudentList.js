@@ -30,6 +30,8 @@ export default class StudentList extends Component {
       })
   }
 
+
+
   deleteStudent = (studentId) => {
     const students_url = 'http://localhost:8080/students/';
 
@@ -124,9 +126,9 @@ export default class StudentList extends Component {
               <tbody>
                 {currentStudents.map(student => (
                   <tr key={student.id}>
-                    <td>{student.student_name}</td>
-                    <td>{student.student_email}</td>
-                    <td>{student.major.major_name}</td>
+                    <td>{student.name}</td>
+                    <td>{student.email}</td>
+                    <td>{student.major.name}</td>
                     <td>
                       <ButtonGroup>
                         <Button

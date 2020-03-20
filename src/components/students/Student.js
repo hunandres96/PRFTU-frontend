@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import StudentToast from './StudentToast'
 import axios from 'axios'
 
-import { Card, Form, Button } from 'react-bootstrap'
+import { Card, Form, Button, DropdownButton } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare, faSave, faUndo } from '@fortawesome/free-solid-svg-icons'
 
@@ -13,11 +13,14 @@ export default class Student extends Component {
     this.state.show = false;
     this.changeStudentState = this.changeStudentState.bind(this);
     this.submitStudent = this.submitStudent.bind(this);
+
+    console.log(this.studentInitialState)
   }
 
   studentInitialState = {
-    student_name: '',
-    student_email: ''
+    name: '',
+    email: '',
+    id: ''
   }
 
   changeStudentState(e) {
@@ -26,12 +29,19 @@ export default class Student extends Component {
     })
   }
 
+  // changeStudentNumber(e) {
+  //   this.setState
+  // }
+
   submitStudent = (e) => {
     e.preventDefault()
 
     const newStudent = {
-      student_name: this.state.student_name,
-      student_email: this.state.student_email
+      name: this.state.name,
+      email: this.state.email,
+      major: {
+        id: this.state.id
+      }
     }
 
     console.log(newStudent)
@@ -56,8 +66,6 @@ export default class Student extends Component {
   }
 
   render() {
-    const { student_name, student_email, major } = this.state;
-
     return (
       <div>
         <div style={{ "display": this.state.show ? "block" : "none" }}>
@@ -72,9 +80,9 @@ export default class Student extends Component {
               <Form.Group controlId="formGridName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control required autoComplete="off"
-                  value={student_name}
+                  value={this.state.name}
                   onChange={this.changeStudentState}
-                  name="student_name"
+                  name="name"
                   type="text"
                   placeholder="Enter name" />
               </Form.Group>
@@ -82,9 +90,9 @@ export default class Student extends Component {
               <Form.Group controlId="formGridEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control required autoComplete="off"
-                  value={student_email}
+                  value={this.state.email}
                   onChange={this.changeStudentState}
-                  name="student_email"
+                  name="email"
                   type="email"
                   placeholder="Enter email" />
               </Form.Group>
@@ -92,10 +100,10 @@ export default class Student extends Component {
               <Form.Group controlId="formGridMajor">
                 <Form.Label>Major</Form.Label>
                 <Form.Control autoComplete="off"
-                  value={major}
+                  value={this.state.id}
                   onChange={this.changeStudentState}
-                  name="major"
-                  type="text"
+                  name="id"
+                  type="number"
                   placeholder="Enter major" />
               </Form.Group>
             </Card.Body>

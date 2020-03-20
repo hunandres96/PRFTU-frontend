@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import Student from './components/students/Student';
 import StudentList from './components/students/StudentList';
 
-function App() {
+const App = () => {
   const margin = {
     marginTop: "20px"
   }
