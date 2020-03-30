@@ -1,0 +1,5 @@
+export const GET_DEPARTMENTS = 'GET_DEPARTMENTS';
+export const GET_DEPARTMENT = 'GET_DEPARTMENT';
+export const GET_COURSES = 'GET_COURSES';
+export const GET_PROFESSORS = 'GET_PROFESSORS';
+export const GET_STUDENTS = 'GET_STUDENTS'
