@@ -16,12 +16,13 @@ const Navbar = () => {
           <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Link to="/home">
+          <Link to="/">
             <Button color="inherit">Home</Button>
           </Link>
 
-          <Button color="inherit">Departments</Button>
-          <Button color="inherit">Courses</Button>
+          <Link to="/departments">
+            <Button color="inherit">Departments</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

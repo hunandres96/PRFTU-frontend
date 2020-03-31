@@ -9,7 +9,7 @@ import {
   GET_COURSES
 } from '../types'
 
-const DepartmentState = (props) => {
+const DepartmentState = props => {
   const initialState = {
     departments: [],
     department: {},
@@ -21,17 +21,20 @@ const DepartmentState = (props) => {
 
   // get all departments
   const getDepartments = async () => {
-    const res = await axios.get('https://localhost:8080/departments');
+    const res = await axios.get('http://localhost:8080/departments');
 
     dispatch({
       type: GET_DEPARTMENTS,
       payload: res.data
     })
+
+    console.log(res.data)
   }
 
   return (
     <DepartmentContext.Provider
       value={{
+        departments: state.departments,
         getDepartments
       }}
     >
@@ -41,3 +44,25 @@ const DepartmentState = (props) => {
 }
 
 export default DepartmentState
+
+
+
+
+
+// const getDepartments = () => {
+//   return axios.get('http://localhost:8080/departments')
+//     .then(res => {
+//       let image = btoa(
+//         new Uint8Array(res.data)
+//           .reduce((data, byte) => data + String.fromCharCode(byte), '')
+//       );
+//       return `data:${res.headers['content-type'].toLowerCase()};base64,${image}`;
+//     })
+
+//   dispatch({
+//     type: GET_DEPARTMENTS,
+//     payload: res.data
+//   })
+
+//   console.log(res.data)
+// }

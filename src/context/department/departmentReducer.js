@@ -11,7 +11,7 @@ export default (state, action) => {
       return {
         ...state,
         departments: action.payload
-      }
+      };
     default:
       return state;
   }
