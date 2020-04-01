@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
+import HomeIcon from '@material-ui/icons/Home';
 
 const Navbar = () => {
   return (
@@ -17,7 +18,9 @@ const Navbar = () => {
             <MenuIcon />
           </IconButton>
           <Link to="/">
-            <Button color="inherit">Home</Button>
+            <IconButton>
+              <HomeIcon />
+            </IconButton>
           </Link>
 
           <Link to="/departments">

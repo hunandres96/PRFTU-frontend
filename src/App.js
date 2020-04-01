@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home'
 import Departments from './components/departments/Departments';
 import DepartmentState from './context/department/DepartmentState';
+import Department from './components/departments/Department';
 
 const App = () => {
 
@@ -15,6 +16,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/departments" component={Departments} />
+          <Route exact path="/department" component={Department} />
         </Switch>
       </Router>
     </DepartmentState>

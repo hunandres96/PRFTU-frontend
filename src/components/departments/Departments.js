@@ -1,5 +1,7 @@
-import React, { Fragment, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import DepartmentContext from '../../context/department/departmentContext'
+import { Link } from 'react-router-dom';
+import Department from './Department';
 
 // material ui imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +9,11 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
+import Apple from '@material-ui/icons/Apple';
+import ExploreIcon from '@material-ui/icons/Explore';
+import NavigationIcon from '@material-ui/icons/Navigation'
 
 // import images
 import marketing from './images/marketing.jpg'
@@ -67,6 +74,13 @@ const Departments = () => {
             <GridListTileBar
               title={department.name}
               subtitle={department.text}
+              actionIcon={
+                <IconButton className={classes.icon}>
+                  <Link to={"/department"}>
+                    <NavigationIcon />
+                  </Link>
+                </IconButton>
+              }
             />
           </GridListTile>
         ))}

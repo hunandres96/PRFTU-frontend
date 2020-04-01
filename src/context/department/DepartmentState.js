@@ -31,11 +31,37 @@ const DepartmentState = props => {
     console.log(res.data)
   }
 
+  // get professors by deptId
+  const getProfessorsByDeptId = async (id) => {
+    const res = await axios.get(`localhost:8080/professors/byDepartments?departmentId=${id}`);
+
+    dispatch({
+      type: GET_PROFESSORS,
+      payload: res.data
+    })
+
+    console.log(res.data)
+  }
+
+  // get courses by deptId
+  const getCoursesByDeptId = async (id) => {
+    const res = await axios.get(`localhost:8080/courses/byDepartments?departmentId=${id}`)
+
+    dispatch({
+      type: GET_COURSES,
+      payload: res.data
+    })
+
+    console.log(res.data)
+  }
+
   return (
     <DepartmentContext.Provider
       value={{
         departments: state.departments,
-        getDepartments
+        getDepartments,
+        getProfessorsByDeptId,
+        getCoursesByDeptId
       }}
     >
       {props.children}
@@ -44,25 +70,3 @@ const DepartmentState = props => {
 }
 
 export default DepartmentState
-
-
-
-
-
-// const getDepartments = () => {
-//   return axios.get('http://localhost:8080/departments')
-//     .then(res => {
-//       let image = btoa(
-//         new Uint8Array(res.data)
-//           .reduce((data, byte) => data + String.fromCharCode(byte), '')
-//       );
-//       return `data:${res.headers['content-type'].toLowerCase()};base64,${image}`;
-//     })
-
-//   dispatch({
-//     type: GET_DEPARTMENTS,
-//     payload: res.data
-//   })
-
-//   console.log(res.data)
-// }
