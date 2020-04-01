@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DepartmentContext from '../../context/department/departmentContext'
 import { Link } from 'react-router-dom';
-import Department from './Department';
 
 // material ui imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,9 +9,6 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
-import Apple from '@material-ui/icons/Apple';
-import ExploreIcon from '@material-ui/icons/Explore';
 import NavigationIcon from '@material-ui/icons/Navigation'
 
 // import images
@@ -44,7 +40,7 @@ const Departments = () => {
   const classes = useStyles();
 
   const departmentContext = useContext(DepartmentContext);
-  const { departments, getDepartments } = departmentContext;
+  const { departments, getDepartments, getProfessorsByDeptId } = departmentContext;
   let compDepartments = departments
 
   useEffect(() => {
@@ -58,8 +54,15 @@ const Departments = () => {
       compDepartments[i].img = images[i]
     }
   }
-
   addImages()
+
+  const [id, setId] = useState('')
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    getProfessorsByDeptId(id);
+    setId('')
+  }
 
   return (
     <div className={classes.root}>
@@ -75,7 +78,7 @@ const Departments = () => {
               title={department.name}
               subtitle={department.text}
               actionIcon={
-                <IconButton className={classes.icon}>
+                <IconButton className={classes.icon} onSubmit={onSubmit}>
                   <Link to={"/department"}>
                     <NavigationIcon />
                   </Link>
