@@ -86,7 +86,7 @@ const Departments = ({ department }) => {
             <img src={department.img} alt='' />
             <GridListTileBar
               title={department.name}
-              subtitle={department.text}
+              subtitle={department.description}
               value={department.id}
               actionIcon={
                 <IconButton

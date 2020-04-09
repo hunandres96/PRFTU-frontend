@@ -23,7 +23,7 @@ const Navbar = () => {
             </IconButton>
           </Link>
 
-          <Link to="/departments">
+          <Link to="/departments" style={{ color: 'white' }}>
             <Button color="inherit">Departments</Button>
           </Link>
         </Toolbar>
