@@ -33,7 +33,7 @@ const DepartmentState = props => {
 
   // get professors by deptId
   const getProfessorsByDeptId = async (id) => {
-    const res = await axios.get(`localhost:8080/professors/byDepartments?departmentId=${id}`);
+    const res = await axios.get(`localhost:8080/professors?departmentId=${id}`);
 
     dispatch({
       type: GET_PROFESSORS,
@@ -45,7 +45,7 @@ const DepartmentState = props => {
 
   // get courses by deptId
   const getCoursesByDeptId = async (id) => {
-    const res = await axios.get(`localhost:8080/courses/byDepartments?departmentId=${id}`)
+    const res = await axios.get(`http://localhost:8080/courses?departmentId=${id}`)
 
     dispatch({
       type: GET_COURSES,
@@ -59,6 +59,7 @@ const DepartmentState = props => {
     <DepartmentContext.Provider
       value={{
         departments: state.departments,
+        courses: state.courses,
         getDepartments,
         getProfessorsByDeptId,
         getCoursesByDeptId

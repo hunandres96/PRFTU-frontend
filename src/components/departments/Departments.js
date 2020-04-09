@@ -28,19 +28,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 800,
-    height: 450
+    width: 1250,
+    height: 550
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
 }));
 
-const Departments = () => {
+const Departments = ({ department }) => {
   const classes = useStyles();
 
   const departmentContext = useContext(DepartmentContext);
-  const { departments, getDepartments, getProfessorsByDeptId } = departmentContext;
+  const { departments, getDepartments, getCoursesByDeptId, courses } = departmentContext;
   let compDepartments = departments
 
   useEffect(() => {
@@ -56,12 +56,22 @@ const Departments = () => {
   }
   addImages()
 
-  const [id, setId] = useState('')
+  //const [id, setId] = useState('')
 
-  const onSubmit = (e) => {
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   const deptId = setId(e.target.value)
+  //   getCoursesByDeptId(deptId);
+  //   console.log(deptId)
+  // }
+
+  const handleClick = (e) => {
     e.preventDefault();
-    getProfessorsByDeptId(id);
-    setId('')
+    console.log(e.currentTarget.value)
+    getCoursesByDeptId(e.currentTarget.value);
+
+
+    console.log('The event was clicked');
   }
 
   return (
@@ -73,13 +83,17 @@ const Departments = () => {
 
         {compDepartments.map(department => (
           <GridListTile key={department.id}>
-            <img src={department.img} alt={department.image} />
+            <img src={department.img} alt='' />
             <GridListTileBar
               title={department.name}
               subtitle={department.text}
+              value={department.id}
               actionIcon={
-                <IconButton className={classes.icon} onSubmit={onSubmit}>
-                  <Link to={"/department"}>
+                <IconButton
+                  className={classes.icon}
+                  value={department.id}
+                  onClick={handleClick}>
+                  <Link to={"/courses"}>
                     <NavigationIcon />
                   </Link>
                 </IconButton>

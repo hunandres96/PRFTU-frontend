@@ -5,7 +5,8 @@ import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home'
 import Departments from './components/departments/Departments';
 import DepartmentState from './context/department/DepartmentState';
-import Department from './components/departments/Department';
+import Department from './components/departments/DepartmentItem';
+import Courses from './components/courses/Courses';
 
 const App = () => {
 
@@ -16,7 +17,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/departments" component={Departments} />
-          <Route exact path="/department" component={Department} />
+          <Route exact path="/courses" component={Courses} />
         </Switch>
       </Router>
     </DepartmentState>
