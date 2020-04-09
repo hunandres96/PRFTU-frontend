@@ -25,7 +25,7 @@ const Courses = () => {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="caption table">
+      <Table className={classes.table}>
         <TableHead>
           <TableRow>
             <TableCell>Course Name</TableCell>
@@ -43,28 +43,3 @@ const Courses = () => {
 }
 
 export default Courses
-
-// return (
-//   <TableContainer component={Paper}>
-//     <Table className={classes.table} aria-label="caption table">
-//       <TableHead>
-//         <TableRow>
-//           <TableCell>Course Name</TableCell>
-//           <TableCell>Course description</TableCell>
-//           <TableCell>Professor Name</TableCell>
-//           <TableCell>Professor Email</TableCell>
-//         </TableRow>
-//       </TableHead>
-//       <TableBody>
-//         {courses.map(course => (
-//           <TableRow key={course.id}>
-//             <TableCell component="th" scope="row">{course.name}</TableCell>
-//             <TableCell component="th" scope="row">{course.description}</TableCell>
-//             <TableCell component="th" scope="row">{course.professor.name}</TableCell>
-//             <TableCell component="th" scope="row">{course.professor.email}</TableCell>
-//           </TableRow>
-//         ))}
-//       </TableBody>
-//     </Table>
-//   </TableContainer>
-// )

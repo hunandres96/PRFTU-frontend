@@ -1,9 +1,10 @@
 import React from 'react'
+import Departments from '../departments/Departments'
 
 const Home = () => {
   return (
     <div>
-      <h1>Perficient Capstone</h1>
+      <Departments />
     </div>
   )
 }

@@ -28,19 +28,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 1250,
-    height: 550
+    width: "100%",
+    height: "100%"
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
 }));
 
-const Departments = ({ department }) => {
+const Departments = () => {
   const classes = useStyles();
 
   const departmentContext = useContext(DepartmentContext);
-  const { departments, getDepartments, getCoursesByDeptId, courses } = departmentContext;
+  const { departments, getDepartments, getCoursesByDeptId } = departmentContext;
   let compDepartments = departments
 
   useEffect(() => {
@@ -56,29 +56,16 @@ const Departments = ({ department }) => {
   }
   addImages()
 
-  //const [id, setId] = useState('')
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   const deptId = setId(e.target.value)
-  //   getCoursesByDeptId(deptId);
-  //   console.log(deptId)
-  // }
-
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(e.currentTarget.value)
     getCoursesByDeptId(e.currentTarget.value);
-
-
-    console.log('The event was clicked');
   }
 
   return (
     <div className={classes.root}>
       <GridList cellHeight={200} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-          <ListSubheader component="div">Departments</ListSubheader>
+          <ListSubheader component="div" style={{ color: 'black' }}>Departments</ListSubheader>
         </GridListTile>
 
         {compDepartments.map(department => (

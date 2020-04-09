@@ -17,8 +17,8 @@ const Navbar = () => {
           <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Link to="/">
-            <IconButton>
+          <Link to="/departments">
+            <IconButton style={{ color: 'white' }}>
               <HomeIcon />
             </IconButton>
           </Link>
