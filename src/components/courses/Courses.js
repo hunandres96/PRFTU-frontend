@@ -28,10 +28,9 @@ const Courses = () => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
+            <TableCell>Course Number</TableCell>
             <TableCell>Course Name</TableCell>
             <TableCell>Course description</TableCell>
-            <TableCell>Professor Name</TableCell>
-            <TableCell>Professor Email</TableCell>
           </TableRow>
         </TableHead>
         {courses.map(course => (

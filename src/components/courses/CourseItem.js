@@ -9,10 +9,9 @@ const CourseItem = ({ course }) => {
   return (
     <TableBody>
       <TableRow key={course.id}>
+        <TableCell component="th" scope="row">{course.number}</TableCell>
         <TableCell component="th" scope="row">{course.name}</TableCell>
         <TableCell component="th" scope="row">{course.description}</TableCell>
-        <TableCell component="th" scope="row">{course.professor.name}</TableCell>
-        <TableCell component="th" scope="row">{course.professor.email}</TableCell>
       </TableRow>
     </TableBody>
   )
